@@ -46,20 +46,22 @@ public class OrbitVision {
 
   NetworkTable table = NetworkTableInstance.getDefault().getTable("orbitVision");
   NetworkTableEntry n = table.getEntry("n");
-  BoundingBox b1 = new BoundingBox(table, 1, n);
+  BoundingBox boxes[] = new BoundingBox[10];
 
   public OrbitVision() {
-    // pass
+    // create all 10 bounding box wrappers
+    for(int i = 0; i < 10; i++ ) {
+      boxes[i] = new BoundingBox(table, i, n);
+    }
   }
 
   public int targetCount() { 
-    return this.tc > 0;
+    return (int) n.getDouble(0.0);
   }
-  
-  
 
-  public double getVertHeight() {
-    return tvert.getDouble(Double.NaN);
+  // returns the bounding box of a given index
+  public BoundingBox getBoundingBox(int index) {
+    return boxes[i];
   }
 
   // Advanced methods of calculations / robot actions and movement 
